@@ -8,7 +8,11 @@ httpServer.listen( PORT, async ()=>{
     console.log('SOCKET listening on port :', PORT)
 } )
 
-io.on('connection', (socketObj)=>{
-    // query object is stored in socketObj.handshake.query
-    console.log('socketObj : ', socketObj.id)
+io.on('connection', (socket)=>{
+    // query object is stored in socket.handshake.query
+    console.log(socket.id, "Connected")
+
+    socket.on('disconnect', async ()=>{
+        console.log(socket.id, "Disconnected")
+    });
 })
