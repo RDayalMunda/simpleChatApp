@@ -15,4 +15,14 @@ io.on('connection', (socket)=>{
     socket.on('disconnect', async ()=>{
         console.log(socket.id, "Disconnected")
     });
+
+    //when a socket emits a message
+    socket.on( 'send-message', async ( msgData )=>{
+
+        // socket.emit('get-message', {...msgData, route: 'emit'}) // to self
+        // io.to(socket.id).emit('message', msgData) // to a particular socket id
+        // socket.broadcast.emit('get-message', msgData) // to every socket except the sender
+        io.emit('get-message', msgData) // to everyone including self
+    } )
+
 })
